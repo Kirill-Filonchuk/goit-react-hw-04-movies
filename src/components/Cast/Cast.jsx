@@ -12,20 +12,21 @@ export default function Cast({ id }) {
     }, [id]);
     console.log('moviesCast', moviesCast);
     return (
-        <ul>
-            {moviesCast && moviesCast.data.cast.map(({ character, name, profile_path }, index) => (<li key={index}>
-                <img style={{ width: '100px', display: 'block'}}
-                    src={
-                        profile_path
-                            ? `https://image.tmdb.org/t/p/w300${profile_path}`
-                    :'https://media.comicbook.com/files/img/default-person.png'
-                        }
-            alt={name}
-          />
-                <li>{name}</li>
-                <p >Character: {character}</p>
+        <p>Hello</p>
+    //     <ul>
+    //         {moviesCast && moviesCast.data.cast.map(({ character, name, profile_path }, index) => (<li key={index}>
+    //             <img style={{ width: '100px', display: 'block'}}
+    //                 src={
+    //                     profile_path
+    //                         ? `https://image.tmdb.org/t/p/w300${profile_path}`
+    //                 :'https://media.comicbook.com/files/img/default-person.png'
+    //                     }
+    //         alt={name}
+    //       />
+    //             <li>{name}</li>
+    //             <p >Character: {character}</p>
           
-            </li>))}
-      </ul>
+    //         </li>))}
+    //   </ul>
     )
 }

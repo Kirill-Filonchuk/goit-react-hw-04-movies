@@ -1,6 +1,6 @@
 import { getMoviesById } from '../../utils/apiService';
-import { useState, useEffect } from 'react';
-import { useRouteMatch, useLocation, useHistory, NavLink, Route, Switch } from 'react-router-dom';
+import { useState, useEffect, Suspence, lazy } from 'react';
+import { useRouteMatch, useLocation, useHistory, Link, Route, Switch,  useParams } from 'react-router-dom';
 
 import Reviews from '../../components/Reviews/Reviews';
 import Cast from '../../components/Cast/Cast';
@@ -10,23 +10,24 @@ export default function MovieDetails() {
 
   // const [moviesReviews, setMoviesReviews] = useState(null);
 
-  const match = useRouteMatch();
+  const {url, path} = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
+  const { movieId } = useParams();
 
   useEffect(() => {
-    getMoviesById(match.params.movieId).then(res => {
+    getMoviesById(movieId).then(res => {
       console.log(res);
       setMovieInfo(res);
     });
-  }, [match.params.movieId]);
+  }, []);
     console.log('location', location);
   console.log('location.state.from', location.state.from);
   console.log('location.state.search', location.state.search);
-  console.log('match', match);
+  // console.log('match', match);
+  console.log('match.path',path);
 
-  console.log('movieInfo', movieInfo);
-console.log('match.path + "/reviews"',match.path+"/reviews");
+  console.log('movieId', movieId);
   return (
     <div>
       <button
@@ -71,26 +72,42 @@ console.log('match.path + "/reviews"',match.path+"/reviews");
 
       <hr />
       <h2>Additional information</h2>
-      <ul>
-        <li key={1}>
-          <NavLink to={`${match.url}/cast`}>Cast</NavLink>
-        </li>
-        <li key={11}>
-          <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
-        </li>
+      {/* <ul> */}
+         <ul >
+          <li >
+            <Link
+              to={{
+                pathname: `${url}/cast`,
+                state: {
+                  from: location?.state?.from ?? "/",
+                },
+              }}
+            >
+              Cast
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: `${url}/reviews`,
+                state: {
+                  from: location?.state?.from ?? "/",
+                },
+              }}
+            >
+              Reviews
+            </Link>
+          </li>
       </ul>
-      <hr />
-      {/* <Route path={`${match.url}/:reviews`}> */}
-      <Switch>
-        {/* <Route exact path="/cast"  component={<Reviews id={match.params.movieId} />} /> */}
-        <Route exact path={match.path + "/cast"}>
-          <Reviews id={match.params.movieId +"/cast"} />
-        </Route>
-        {/* <Route exact path={match.path + "/reviews"} component={<Cast id={match.path+"/reviews"} />} /> */}
-         <Route exact path={match.path + "/reviews"}>
-        <Cast id={match.path+"/reviews"} />
-        </Route>
-      </Switch>
+      <Cast id={movieId} />
+        <Switch>
+          <Route path={`${path}/cast/`}>
+            <Cast id={movieId} />
+          </Route>
+          <Route path={`${path}/reviews`}>
+            <Reviews id={movieId} />
+          </Route>
+        </Switch>
     </div>
   );
 }
