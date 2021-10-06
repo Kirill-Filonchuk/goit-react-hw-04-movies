@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import HomePage from './views/HomePage/HomePage';
 import Movies from './views/Movies/Movies';
 import MovieDetails from './views/MovieDetailsPage/MovieDetailsPage';
-
+// redirect
 function App() {
   return (
     <div className="App">

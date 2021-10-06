@@ -21,4 +21,14 @@ async function getMoviesById(id) {
   return response;
 }
 
-export { getTrandingMovies, getSearchMovies, getMoviesById };
+async function getMoviesCredits(id) {
+  const response = await axios.get(`movie/${id}/credits?api_key=${KEY}`);
+  return response;
+}
+
+async function getMoviesRewiews(id) {
+  const response = await axios.get(`movie/${id}/reviews?api_key=${KEY}`);
+  return response;
+}
+
+export { getTrandingMovies, getSearchMovies, getMoviesById, getMoviesCredits, getMoviesRewiews };
