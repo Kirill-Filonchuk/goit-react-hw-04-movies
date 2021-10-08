@@ -10,9 +10,18 @@ function App() {
     <div className="App">
       <Navigation />
       <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/movies" exact component={Movies} />
-        <Route path="/movies/:movieId" exact component={MovieDetails} />
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/movies">
+          <Movies />
+        </Route>
+        <Route path="/movie/:movieId">
+          <MovieDetails />
+        </Route>
+        {/* <Route path="/" exact component={HomePage} />
+        <Route path="/movies" component={Movies} />
+        <Route path="/movies/:movieId" component={MovieDetails} /> */}
       </Switch>
     </div>
   );

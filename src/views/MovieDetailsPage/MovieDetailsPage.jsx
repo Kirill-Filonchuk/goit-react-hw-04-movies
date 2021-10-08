@@ -7,6 +7,7 @@ import Cast from '../../components/Cast/Cast';
 
 export default function MovieDetails() {
   const [movieInfo, setMovieInfo] = useState(null);
+const [loc, setLoc]=useState("")
 
   // const [moviesReviews, setMoviesReviews] = useState(null);
 
@@ -16,30 +17,35 @@ export default function MovieDetails() {
   const { movieId } = useParams();
 
   useEffect(() => {
+    location.state && setLoc(location.state.from)
+},[])
+
+
+  useEffect(() => {
     getMoviesById(movieId).then(res => {
       console.log(res);
       setMovieInfo(res);
     });
   }, []);
     console.log('location', location);
-  console.log('location.state.from', location.state.from);
+  console.log('location.state.from', loc);
+  console.log('history',history);
   console.log('location.state.search', location.state.search);
   // console.log('match', match);
   console.log('match.path',path);
 
   console.log('movieId', movieId);
+
+  const btnGoBack = () => {
+    history.push(location?.state?.from ?? "/");
+    // history.push(loc)
+  }
+
   return (
     <div>
       <button
         type="button"
-        onClick={() => {
-          // history.push(location.state.from);
-          history.push({
-            pathname:location.state.from,
-            // state: {from: location.state.from } ,
-            search:location.search,
-          });
-        }}
+        onClick={btnGoBack}
       >
         Go Back
       </button>
@@ -99,14 +105,15 @@ export default function MovieDetails() {
             </Link>
           </li>
       </ul>
-      <Cast id={movieId} />
+      {/* <Cast id={movieId} /> */}
         <Switch>
-          <Route path={`${path}/cast/`}>
+        <Route path={`${path}/cast/`}>
             <Cast id={movieId} />
           </Route>
           <Route path={`${path}/reviews`}>
             <Reviews id={movieId} />
-          </Route>
+        </Route>
+        
         </Switch>
     </div>
   );

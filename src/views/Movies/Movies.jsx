@@ -1,20 +1,57 @@
-import { useState } from "react";
-import { getSearchMovies } from '../../utils/apiService'
-import MoviesList from "../../components/MoviesList/MoviesList";
+import { useEffect, useState } from 'react';
+import {useLocation, useHistory} from 'react-router-dom';
+import { getSearchMovies } from '../../utils/apiService';
+import MoviesList from '../../components/MoviesList/MoviesList';
 
 export default function Movies() {
-    const [query, setQuery] = useState("");
-    const [movies, setMovies] = useState([]);
-    
-    const handleChange = (e) => {
-        setQuery(e.target.value)
-    }
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+   
+  const history = useHistory();
+  const location = useLocation();
+  const searchQuery = new URLSearchParams(location.search).get('query') || '';
+  
+  console.log('location', location);
+  console.log('query', query);
+  console.log('searchQuery', searchQuery);
 
-    const handleSearchMovies = (e) => {
-        e.preventDefault()
-        getSearchMovies(query)
-        .then(res=>setMovies(res.data.results))
+  useEffect(() => {
+    if (query !== '') {
+      setQuery(searchQuery)
     }
+    if (searchQuery !== "") {
+      formSubmit(searchQuery);
+    }
+  }, [searchQuery]);
+
+  // useEffect(()=>{formSubmit(searchQuery);},[searchQuery])
+
+  const handleSearchMovies = e => {
+    e.preventDefault();
+    // getSearchMovies(query).then(res => setMovies(res.data.results));
+setMovies([])
+    history.push({ ...location, search: `query=${query}` });
+  };
+  
+  const handleChange = e => {
+    setQuery(e.target.value);
+  };
+
+  function formSubmit(searchQuery) {
+    if (searchQuery.trim === "") {
+      setQuery([]);
+    } else {
+         getSearchMovies(searchQuery).then(res => setMovies(res.data.results));
+    }
+    return 
+  };
+
+  // const btnGoBack = () => {
+  //   history.push(location?.state?.from ?? "/");
+  //   // history.push(loc)
+  // };
+
+
   return (
     <div>
       <h1>Movies</h1>
@@ -30,12 +67,22 @@ export default function Movies() {
             autocomplete="off"
             autofocus
             placeholder="Search images and photos"
-                      value={query}
-                      onChange={handleChange}
+            value={query}
+            onChange={handleChange}
           />
         </form>
-          </header>
-          <MoviesList movies={movies} page='/movies'/>
+      </header>
+
+  {/* <button
+        type="button"
+        onClick={btnGoBack}
+      >
+        Go Back
+      </button> */}
+      <hr />
+
+      <MoviesList movies={movies} page="/movies" />
     </div>
   );
 }
+
