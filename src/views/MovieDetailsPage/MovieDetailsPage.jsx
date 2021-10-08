@@ -7,19 +7,11 @@ import Cast from '../../components/Cast/Cast';
 
 export default function MovieDetails() {
   const [movieInfo, setMovieInfo] = useState(null);
-// const [loc, setLoc]=useState("")
-
-  // const [moviesReviews, setMoviesReviews] = useState(null);
 
   const {url, path} = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
   const { movieId } = useParams();
-
-//   useEffect(() => {
-//     location.state && setLoc(location.state.from)
-// },[])
-
 
   useEffect(() => {
     getMoviesById(movieId).then(res => {
@@ -37,9 +29,15 @@ export default function MovieDetails() {
   // console.log('movieId', movieId);
 
   const btnGoBack = () => {
-    history.push(location?.state?.from ?? "/");
-    console.log('BTN_history',history);
-    // history.push(loc)
+    if (location && location.state && location.state.from) {
+      history.push(location.state.from);
+       console.log('BTN_history',history);
+      return
+    }
+    history.push("/")
+    // history.push(location?.state?.from ?? "/");
+    // console.log('BTN_history',history);
+
   }
 
   return (
