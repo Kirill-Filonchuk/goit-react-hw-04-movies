@@ -7,7 +7,7 @@ import Cast from '../../components/Cast/Cast';
 
 export default function MovieDetails() {
   const [movieInfo, setMovieInfo] = useState(null);
-const [loc, setLoc]=useState("")
+// const [loc, setLoc]=useState("")
 
   // const [moviesReviews, setMoviesReviews] = useState(null);
 
@@ -16,9 +16,9 @@ const [loc, setLoc]=useState("")
   const history = useHistory();
   const { movieId } = useParams();
 
-  useEffect(() => {
-    location.state && setLoc(location.state.from)
-},[])
+//   useEffect(() => {
+//     location.state && setLoc(location.state.from)
+// },[])
 
 
   useEffect(() => {
@@ -28,16 +28,17 @@ const [loc, setLoc]=useState("")
     });
   }, []);
     console.log('location', location);
-  console.log('location.state.from', loc);
+
   console.log('history',history);
   console.log('location.state.search', location.state.search);
   // console.log('match', match);
-  console.log('match.path',path);
+  // console.log('match.path',path);
 
-  console.log('movieId', movieId);
+  // console.log('movieId', movieId);
 
   const btnGoBack = () => {
     history.push(location?.state?.from ?? "/");
+    console.log('BTN_history',history);
     // history.push(loc)
   }
 

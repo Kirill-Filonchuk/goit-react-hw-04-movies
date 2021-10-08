@@ -46,10 +46,10 @@ setMovies([])
     return 
   };
 
-  // const btnGoBack = () => {
-  //   history.push(location?.state?.from ?? "/");
-  //   // history.push(loc)
-  // };
+  const btnGoBack = () => {
+    history.push(location?.state?.from ?? "/");
+    // history.push(loc)
+  };
 
 
   return (
@@ -73,12 +73,12 @@ setMovies([])
         </form>
       </header>
 
-  {/* <button
+  <button
         type="button"
         onClick={btnGoBack}
       >
         Go Back
-      </button> */}
+      </button>
       <hr />
 
       <MoviesList movies={movies} page="/movies" />
