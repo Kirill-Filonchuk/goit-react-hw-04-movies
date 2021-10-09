@@ -1,0 +1,53 @@
+.container {
+  padding: 10px;
+}
+
+.button {
+  background-color: #4caf50; /* Green */
+  border-radius: 4px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card {
+  font-style: normal;
+  font-weight: 500;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.genres {
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.addInform {
+  margin-left: 50px;
+  padding-left: 0;
+  list-style-type: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.itemInform {
+  list-style: none;
+  text-indent: -1em;
+  display: block;
+  text-align: left;
+}
+
+.itemInform::before {
+  content: '\25ba';
+  padding-right: 5px;
+  color: red;
+}

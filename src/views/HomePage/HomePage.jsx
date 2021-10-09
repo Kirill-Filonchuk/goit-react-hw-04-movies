@@ -9,11 +9,11 @@ export default function HomePage() {
         getTrandingMovies()
         .then(resp=>setMovies(resp.data.results))
     }, [])
-    console.log('movies', movies);
+    // console.log('movies', movies);
     
     return (
         <div>
-            <h1>Home Page</h1>
+            <h1>Most of the populars movies</h1>
             <MoviesList movies={ movies} page='/'/>
         </div>
     )

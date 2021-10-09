@@ -1,0 +1,41 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.navLink {
+  margin-left: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  width: 90px;
+  padding: 16px 32px;
+  background: -moz-linear-gradient(top, #42aaff 0%, #003366);
+  background: -webkit-gradient(linear, left top, left bottom, from(#42aaff), to(#003366));
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #003366;
+  -moz-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px rgba(255, 255, 255, 0.5);
+  -webkit-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5),
+    inset 0px 0px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px rgba(255, 255, 255, 0.5);
+  text-shadow: 0px -1px 0px rgba(000, 000, 000, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+.navLink:hover {
+  background: -moz-linear-gradient(top, #ffc342 0%, #baec5d);
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffc342), to(#baec5d));
+  color: #110202;
+}
+
+.navLinkActive {
+  background: -moz-linear-gradient(top, #00660e 0%, #1ce699);
+  background: -webkit-gradient(linear, left top, left bottom, from(#00660e), to(#1ce699));
+}

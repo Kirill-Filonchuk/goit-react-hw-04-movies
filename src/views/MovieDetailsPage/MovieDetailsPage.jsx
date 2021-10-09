@@ -1,9 +1,12 @@
 import { getMoviesById } from '../../utils/apiService';
-import { useState, useEffect, Suspence, lazy } from 'react';
-import { useRouteMatch, useLocation, useHistory, Link, Route, Switch,  useParams } from 'react-router-dom';
+import { useState, useEffect, Suspense, lazy } from 'react';
+import { useRouteMatch, useLocation, useHistory, Link, Route, Switch, useParams } from 'react-router-dom';
+import s from './MovieDetailsPage.module.css'
 
-import Reviews from '../../components/Reviews/Reviews';
-import Cast from '../../components/Cast/Cast';
+// import Reviews from '../../components/Reviews/Reviews';
+// import Cast from '../../components/Cast/Cast';
+const Reviews = lazy(() => import('../../components/Reviews/Reviews' /* webpackChunkName: "Reviews" */))
+const Cast = lazy(() => import('../../components/Cast/Cast' /* webpackChunkName: "Cast" */))
 
 export default function MovieDetails() {
   const [movieInfo, setMovieInfo] = useState(null);
@@ -15,53 +18,31 @@ export default function MovieDetails() {
 
   useEffect(() => {
     getMoviesById(movieId).then(res => {
-      console.log(res);
+      // console.log(res);
       setMovieInfo(res);
     });
-  }, []);
-    console.log('location', location);
-
-  console.log('history',history);
-  console.log('location.state.search', location.state.search);
-  // console.log('match', match);
-  // console.log('match.path',path);
-
-  // console.log('movieId', movieId);
-
-  // const btnGoBack = () => {
-  //   if (location && location.state && location.state.from) {
-  //     history.push(location.state.from);
-  //     // history.push({
-  //     //   state: { from: location, query: `${ query }`}
-  //     return   
-  //   }
-  //     // history.push(location.state.from);
-  //      console.log('BTN_history',history);
-  //   history.push("/")
-  //   // history.push(location?.state?.from ?? "/");
-  //   // console.log('BTN_history',history);
-
-  // }
+  }, [movieId]);
+    // console.log('location', location);
+  // console.log('history',history);
+  // console.log('location.state.search', location.state.search);
+ 
 const btnGoBack = () => {
     history.push(location?.state?.from ?? "/");
-    // history.push(loc)
   };
-  //   history.push({
-  //   state:{query:location.state.query}
-  // })
-
-
+ 
   return (
-    <div>
+    <div className={s.container}>
       <button
+        className={s.button}
         type="button"
         onClick={btnGoBack}
       >
         Go Back
       </button>
-      <h1>MovieDetails</h1>
+{/*       
+      <h1>MovieDetails</h1> */}
       {movieInfo && (
-        <div>
+        <div className={s.card}>
           <img
             src={
               movieInfo.data.poster_path
@@ -70,27 +51,27 @@ const btnGoBack = () => {
             }
             alt=""
           />{' '}
-          <p>{movieInfo.data.original_title}</p> <p>{movieInfo.data.overview}</p>
+          <h2>{movieInfo.data.original_title}</h2>
+          <p>{movieInfo.data.overview}</p>
           <p>
             <span>User Score - </span>
             {movieInfo.data.vote_average} %
           </p>
-          <p>
-            <span>Genres</span>
-            <ul>
+         
+            <h3>Genres</h3>
+            <ul className={s.genres}>
               {movieInfo.data.genres.map(({ name }, index) => (
                 <li key={index}>{name}</li>
               ))}
             </ul>
-          </p>
+          
         </div>
       )}
 
       <hr />
       <h2>Additional information</h2>
-      {/* <ul> */}
-         <ul >
-          <li >
+        <ul className={s.addInform}>
+          <li key={1} className={s.itemInform}>
             <Link
               to={{
                 pathname: `${url}/cast`,
@@ -103,7 +84,7 @@ const btnGoBack = () => {
               Cast
             </Link>
           </li>
-          <li>
+          <li key={2} className={s.itemInform}>
             <Link
               to={{
                 pathname: `${url}/reviews`,
@@ -116,18 +97,20 @@ const btnGoBack = () => {
             </Link>
           </li>
       </ul>
+      <hr />
       {/* <Cast id={movieId} /> */}
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
-        {/* <Route path={`${path}/cast/`}> */}
-        <Route path="/movie/:movieId/cast" exact>
+        <Route path={`${path}/cast/`}>
+        {/* <Route path="/movie/:movieId/cast" exact> */}
             <Cast id={movieId} />
           </Route>
-        {/* <Route path={`${path}/reviews`}> */}
-        <Route path="/movie/:movieId/reviews" exact>
+        <Route path={`${path}/reviews`}>
+        {/* <Route path="/movie/:movieId/reviews" exact> */}
             <Reviews id={movieId} />
         </Route>
-        
         </Switch>
+        </Suspense>
     </div>
   );
 }

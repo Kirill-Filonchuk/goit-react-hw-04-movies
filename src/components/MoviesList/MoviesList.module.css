@@ -1,0 +1,21 @@
+.addInform {
+  margin-left: 50px;
+  padding-left: 0;
+  list-style-type: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.itemInform {
+  list-style: none;
+  text-indent: -1em;
+  display: block;
+  text-align: left;
+}
+
+.itemInform::before {
+  content: '\25ba';
+  padding-right: 5px;
+  color: red;
+}
