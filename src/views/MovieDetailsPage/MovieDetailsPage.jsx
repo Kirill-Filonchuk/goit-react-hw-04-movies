@@ -28,17 +28,28 @@ export default function MovieDetails() {
 
   // console.log('movieId', movieId);
 
-  const btnGoBack = () => {
-    if (location && location.state && location.state.from) {
-      history.push(location.state.from);
-       console.log('BTN_history',history);
-      return
-    }
-    history.push("/")
-    // history.push(location?.state?.from ?? "/");
-    // console.log('BTN_history',history);
+  // const btnGoBack = () => {
+  //   if (location && location.state && location.state.from) {
+  //     history.push(location.state.from);
+  //     // history.push({
+  //     //   state: { from: location, query: `${ query }`}
+  //     return   
+  //   }
+  //     // history.push(location.state.from);
+  //      console.log('BTN_history',history);
+  //   history.push("/")
+  //   // history.push(location?.state?.from ?? "/");
+  //   // console.log('BTN_history',history);
 
-  }
+  // }
+const btnGoBack = () => {
+    history.push(location?.state?.from ?? "/");
+    // history.push(loc)
+  };
+  //   history.push({
+  //   state:{query:location.state.query}
+  // })
+
 
   return (
     <div>
@@ -84,7 +95,8 @@ export default function MovieDetails() {
               to={{
                 pathname: `${url}/cast`,
                 state: {
-                  from: location?.state?.from ?? "/",
+                  // from: location?.state?.from ?? "/",
+                  from: location.state? location.state.from : '/',
                 },
               }}
             >
@@ -96,7 +108,7 @@ export default function MovieDetails() {
               to={{
                 pathname: `${url}/reviews`,
                 state: {
-                  from: location?.state?.from ?? "/",
+                  from: location.state? location.state.from : '/',
                 },
               }}
             >
@@ -106,10 +118,12 @@ export default function MovieDetails() {
       </ul>
       {/* <Cast id={movieId} /> */}
         <Switch>
-        <Route path={`${path}/cast/`}>
+        {/* <Route path={`${path}/cast/`}> */}
+        <Route path="/movie/:movieId/cast" exact>
             <Cast id={movieId} />
           </Route>
-          <Route path={`${path}/reviews`}>
+        {/* <Route path={`${path}/reviews`}> */}
+        <Route path="/movie/:movieId/reviews" exact>
             <Reviews id={movieId} />
         </Route>
         

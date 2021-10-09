@@ -30,7 +30,7 @@ export default function Movies() {
     e.preventDefault();
     // getSearchMovies(query).then(res => setMovies(res.data.results));
 setMovies([])
-    history.push({ ...location, search: `query=${query}` });
+    history.push({ ...location, search: `query=${query}`});
   };
   
   const handleChange = e => {
@@ -46,11 +46,10 @@ setMovies([])
     return 
   };
 
-  const btnGoBack = () => {
-    history.push(location?.state?.from ?? "/");
-    // history.push(loc)
-  };
-
+  // const btnGoBack = () => {
+  //   history.push(location?.state?.from ?? "/");
+  //   // history.push(loc)
+  // };
 
   return (
     <div>
@@ -73,15 +72,15 @@ setMovies([])
         </form>
       </header>
 
-  <button
+  {/* <button
         type="button"
         onClick={btnGoBack}
       >
         Go Back
-      </button>
+      </button> */}
       <hr />
 
-      <MoviesList movies={movies} page="/movies" />
+      <MoviesList movies={movies} />
     </div>
   );
 }
