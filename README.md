@@ -30,25 +30,5 @@ https://developers.themoviedb.org/3/movies/get-movie-credits - запрос ин
 <Cast>, информация о актерском составе. Рендерится на странице <MovieDetailsPage>.
 /movies/:movieId/reviews - компонент <Reviews>, информация об обзорах. Рендерится на странице
 <MovieDetailsPage>. Code Splitting (разделение кода) Добавь асинхронную загрузку JS-кода для
-маршрутов приложения используя React.lazy() и Suspense.
-
-    <li key={1}>
-          <Link to={{pathname:`${match.url}/cast`}}>Cast</Link>
-        </li>
-        <li key={11}>
-          <Link to={{ pathname: `${match.url}/reviews` }}>Reviews</Link>
-        </li>
-      </ul>
-      {/* <Cast id={movieId} /> */}
-      <hr />
-      {/* <Route path={`${match.url}/:reviews`}> */}
-      <Switch>
-        {/* <Route exact path="/cast"  component={<Reviews id={match.params.movieId} />} /> */}
-        <Route path={match.path + "/cast"}>
-          <Reviews id={movieId} />
-        </Route>
-        {/* <Route exact path={match.path + "/reviews"} component={<Cast id={match.path+"/reviews"} />} /> */}
-         <Route path={match.path + "/reviews"}>
-        <Cast id={movieId} />
-        </Route>
-      </Switch>
+маршрутов приложения используя React.lazy() и Suspense. //6//"homepage":
+"https://Kirill-Filonchuk.github.io/goit-react-hw-04-movies", // "deploy": "gh-pages -d build"
