@@ -76,8 +76,8 @@ const btnGoBack = () => {
               to={{
                 pathname: `${url}/cast`,
                 state: {
-                  // from: location?.state?.from ?? "/",
-                  from: location.state? location.state.from : '/',
+                  from: location?.state?.from ?? "/",
+                  // from: location.state ? location.state.from : '/',
                 },
               }}
             >
@@ -88,8 +88,9 @@ const btnGoBack = () => {
             <Link
               to={{
                 pathname: `${url}/reviews`,
-                state: {
-                  from: location.state? location.state.from : '/',
+              state: {
+                  from: location?.state?.from ?? "/",
+                  // from: location.state ? location.state.from : '/',
                 },
               }}
             >
